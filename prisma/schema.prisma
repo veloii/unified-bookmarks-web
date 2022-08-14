@@ -1,0 +1,61 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id    String @id @default(cuid())
+  email String @unique
+
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  createdBookmarks Bookmark[] @relation("createdByUser")
+
+  password    Password?
+  ownedTeams  Team[]    @relation("ownedTeams")
+  teams       Team[]    @relation("teams")
+  bannedTeams Team[]    @relation("bannedTeams")
+}
+
+model Password {
+  hash String
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  userId String @unique
+}
+
+model Team {
+  id    String @id @default(cuid())
+  code  String @unique @default(cuid())
+  name  String @unique
+  users User[] @relation("teams")
+
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  bookmarks Bookmark[]
+
+  bannedUsers User[] @relation("bannedTeams")
+
+  owner   User   @relation("ownedTeams", fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  ownerId String
+}
+
+model Bookmark {
+  id   String @id @default(cuid())
+  name String
+  link String
+
+  createdBy       User     @relation("createdByUser", fields: [createdByUserId], references: [id])
+  createdByUserId String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  team   Team   @relation(fields: [teamId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  teamId String
+
+  @@unique([name, teamId])
+}
