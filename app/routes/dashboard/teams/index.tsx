@@ -11,6 +11,6 @@ export default function IndexPage() {
   useEffect(() => {
     if (data.teams.length <= 0) navigate("/dashboard/teams/new");
     else navigate("/dashboard/teams/view");
-  });
+  }, []);
   return <div></div>;
 }

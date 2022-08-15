@@ -25,7 +25,7 @@ export default function IndexPage() {
   const user = useUser();
   useEffect(() => {
     if (data.teams.length <= 0) navigate("/dashboard/teams/new");
-  });
+  }, []);
   return (
     <div className="space-y-5 p-5">
       <h2 className="text-4xl font-black">Welcome back</h2>
