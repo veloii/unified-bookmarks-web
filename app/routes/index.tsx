@@ -32,13 +32,13 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function Index() {
   return (
-    <>
+    <div data-theme="dark">
       <Header />
       <Hero />
       <TeamsSection />
       <ExtensionSection />
       <CTA />
       <Footer />
-    </>
+    </div>
   );
 }

@@ -7,6 +7,7 @@ import { editPassword, getUserById, verifyLogin } from "~/models/user.server";
 import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
 import logo from "~/branding/UN.png";
+import ThemePicker from "~/components/ThemePicker";
 
 type ActionData = {
   errors?: {
@@ -109,7 +110,7 @@ export default function Settings() {
             You are logged in as:{" "}
             <span className="font-semibold">{user.email}</span>
           </p>
-
+          <ThemePicker />
           <Form method="post">
             <div className="flex w-full flex-col items-center gap-5 md:flex-row">
               <div className="form-control w-full">

@@ -1,6 +1,6 @@
 import { Team } from "@prisma/client";
 import { Link, NavLink, useSubmit } from "@remix-run/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getTeams } from "~/models/team.server";
 import {
   BellIcon,
@@ -14,6 +14,7 @@ import {
 } from "@heroicons/react/solid";
 import { useUser } from "~/utils";
 import Logo from "~/branding/UNFull75px.png";
+import LogoLight from "~/branding/UNFull75Lightpx.png";
 
 export default function Navbar(props: {
   children: React.ReactNode;
@@ -24,7 +25,7 @@ export default function Navbar(props: {
   const user = useUser();
 
   return (
-    <div className="drawer drawer-mobile min-h-screen">
+    <div className="drawer-mobile drawer min-h-screen">
       <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <div className="navbar bg-base-100 lg:hidden">
@@ -49,7 +50,18 @@ export default function Navbar(props: {
       <div className="drawer-side">
         <label htmlFor="navbar-drawer" className="drawer-overlay"></label>
         <ul className="menu w-80 space-y-7 overflow-y-auto bg-base-300 p-4 font-semibold text-base-content">
-          <img src={Logo} alt="Unified Bookmarks" className="px-1" />
+          <div>
+            <img
+              src={LogoLight}
+              alt="Unified Bookmarks"
+              className="light-logo px-1"
+            />
+            <img
+              src={Logo}
+              alt="Unified Bookmarks"
+              className="dark-logo px-1"
+            />
+          </div>
           <div className="space-y-2">
             <li>
               <NavLink

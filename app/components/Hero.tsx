@@ -21,7 +21,7 @@ export default function Hero() {
             </Link>
             <a
               href="#learn-more"
-              className="btn btn-outline btn-md h-2.5 min-h-[2.5rem] rounded-full border-slate-400 px-5 normal-case text-black hover:border-slate-700 hover:bg-transparent hover:text-inherit"
+              className="btn-white btn btn-outline btn-md h-2.5 min-h-[2.5rem] rounded-full border-slate-400 px-5 normal-case text-black hover:border-slate-700 hover:bg-transparent hover:text-inherit"
             >
               How does it work?
             </a>

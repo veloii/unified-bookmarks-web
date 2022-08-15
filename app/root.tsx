@@ -1,3 +1,4 @@
+import { themeChange } from "theme-change";
 import type {
   LinksFunction,
   LoaderFunction,
@@ -18,6 +19,7 @@ import tailwindStylesheetUrl from "./styles/tailwind.css";
 import globalsStylesheetUrl from "./styles/globals.css";
 import { getUser } from "./session.server";
 import Flow from "./components/Flow";
+import { useEffect } from "react";
 export { ErrorBoundary, CatchBoundary } from "./components/ErrorsBrand";
 
 export const links: LinksFunction = () => {
@@ -50,8 +52,11 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function App() {
+  useEffect(() => {
+    themeChange(false);
+  }, []);
   return (
-    <html lang="en" data-theme="dark" className="h-full overflow-x-hidden">
+    <html lang="en" className="h-full overflow-x-hidden">
       <head>
         <Meta />
         <Links />
