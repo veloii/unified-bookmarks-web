@@ -3,6 +3,7 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
+    "prod": "remix-serve ./build",
     "build": "run-s build:*",
     "build:css": "npm run generate:css -- --minify",
     "build:remix": "remix build",
@@ -40,6 +41,7 @@
     "@remix-run/express": "^1.6.7",
     "@remix-run/node": "^1.6.7",
     "@remix-run/react": "^1.6.7",
+    "@remix-run/serve": "^1.6.8",
     "@remix-run/server-runtime": "^1.6.7",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
