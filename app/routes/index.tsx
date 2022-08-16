@@ -18,7 +18,7 @@ export const meta: MetaFunction = () => {
   return {
     title: "Unified Bookmarks",
     description: "Home of Unifed Bookmarks",
-    "twitter:card": "summary_large_image",
+
     "og:description": "Home of Unified Bookmarks",
     "og:image": logo,
   };

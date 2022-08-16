@@ -61,7 +61,7 @@ export const meta: MetaFunction = ({ parentsData }) => {
     ? {
         title: "Settings - Unified Bookmarks",
         description: "Change your settings",
-        "twitter:card": "summary_large_image",
+
         "og:description": "Change your settings",
         "og:image": logo,
       }

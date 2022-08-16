@@ -13,7 +13,7 @@ export const meta: MetaFunction = () => {
   return {
     title: "Dashboard - Unified Bookmarks",
     description: "Dashboard of Unified Bookmarks",
-    "twitter:card": "summary_large_image",
+
     "og:description": "Dashboard of Unified Bookmarks",
     "og:image": logo,
   };

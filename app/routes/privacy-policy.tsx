@@ -7,7 +7,6 @@ export const meta: MetaFunction = () => {
   return {
     title: "Privacy Policy - Unified Bookmarks",
     description: "Last updated: August 13, 2022",
-    "twitter:card": "summary_large_image",
     "og:description": "Last updated: August 13, 2022",
     "og:image": logo,
   };

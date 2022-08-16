@@ -20,7 +20,7 @@ export const meta: MetaFunction = ({ parentsData }) => {
     ? {
         title: "New Team - Unified Bookmarks",
         description: "Create a new team",
-        "twitter:card": "summary_large_image",
+
         "og:description": "Create a new team",
         "og:image": logo,
       }

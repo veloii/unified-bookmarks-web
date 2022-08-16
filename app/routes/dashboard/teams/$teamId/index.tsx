@@ -37,7 +37,7 @@ export const meta: MetaFunction = ({ parentsData }) => {
     ? {
         title: `${parentsData["routes/dashboard/teams/$teamId"].team.name} - Overview - Unified Bookmarks`,
         description: "View your team",
-        "twitter:card": "summary_large_image",
+
         "og:description": "View your team",
         "og:image": logo,
       }
