@@ -24,12 +24,16 @@ import { isServer } from "./utils";
 export { ErrorBoundary, CatchBoundary } from "./components/ErrorsBrand";
 
 if (!isServer()) {
-  loadCSS(tailwindStylesheetUrl);
-  loadCSS(globalsStylesheetUrl);
+  loadCSS("https://rsms.me/inter/inter.css");
   loadCSS(
     "https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap"
   );
+  loadCSS(globalsStylesheetUrl);
 }
+
+export const links: LinksFunction = () => {
+  return [{ rel: "stylesheet", href: tailwindStylesheetUrl }];
+};
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
