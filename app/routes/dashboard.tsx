@@ -12,6 +12,7 @@ export { ErrorBoundary, CatchBoundary } from "~/components/Errors";
 export const meta: MetaFunction = () => {
   return {
     title: "Dashboard - Unified Bookmarks",
+    "og:title": "Dashboard - Unified Bookmarks",
     description: "Dashboard of Unified Bookmarks",
 
     "og:description": "Dashboard of Unified Bookmarks",

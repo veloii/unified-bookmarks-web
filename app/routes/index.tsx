@@ -17,6 +17,7 @@ import invariant from "tiny-invariant";
 export const meta: MetaFunction = () => {
   return {
     title: "Unified Bookmarks",
+    "og:title": "Unified Bookmarks",
     description: "Home of Unifed Bookmarks",
 
     "og:description": "Home of Unified Bookmarks",

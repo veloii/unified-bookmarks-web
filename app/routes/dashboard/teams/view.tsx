@@ -9,6 +9,7 @@ export const meta: MetaFunction = ({ parentsData }) => {
   return parentsData.root.user
     ? {
         title: "Teams - Unified Bookmarks",
+        "og:title": "Teams - Unified Bookmarks",
         description: "View Teams",
 
         "og:description": "View Teams",

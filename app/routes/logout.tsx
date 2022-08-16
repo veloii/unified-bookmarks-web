@@ -7,6 +7,7 @@ import logo from "~/branding/UN.webp";
 export const meta: MetaFunction = () => {
   return {
     title: "Logout - Unified Bookmarks",
+    "og:title": "Logout - Unified Bookmarks",
     description: "Logout of Unifed Bookmarks",
 
     "og:description": "Logout of Unified Bookmarks",

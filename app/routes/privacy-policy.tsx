@@ -6,6 +6,7 @@ import logo from "~/branding/UN.webp";
 export const meta: MetaFunction = () => {
   return {
     title: "Privacy Policy - Unified Bookmarks",
+    "og:title": "Privacy Policy - Unified Bookmarks",
     description: "Last updated: August 13, 2022",
     "og:description": "Last updated: August 13, 2022",
     "og:image": logo,

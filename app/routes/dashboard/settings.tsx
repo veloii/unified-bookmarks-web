@@ -64,6 +64,7 @@ export const meta: MetaFunction = ({ parentsData }) => {
 
         "og:description": "Change your settings",
         "og:image": logo,
+        "og:title": logo,
       }
     : {};
 };

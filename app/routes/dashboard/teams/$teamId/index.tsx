@@ -36,6 +36,7 @@ export const meta: MetaFunction = ({ parentsData }) => {
   return parentsData["routes/dashboard/teams/$teamId"]?.team
     ? {
         title: `${parentsData["routes/dashboard/teams/$teamId"].team.name} - Overview - Unified Bookmarks`,
+        "og:title": `${parentsData["routes/dashboard/teams/$teamId"].team.name} - Overview - Unified Bookmarks`,
         description: "View your team",
 
         "og:description": "View your team",

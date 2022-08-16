@@ -18,6 +18,7 @@ import Header from "~/components/Header";
 export const meta: MetaFunction = () => {
   return {
     title: "Sign up - Unified Bookmarks",
+    "og:title": "Sign up - Unified Bookmarks",
     description: "Sign up to Unifed Bookmarks",
 
     "og:description": "Sign up to Unified Bookmarks",
