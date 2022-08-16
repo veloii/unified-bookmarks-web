@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import logo from "~/branding/UNFull75Lightpx.png";
+import logo from "~/branding/UNFull75Lightpx.webp";
 
 export default function Header() {
   return (

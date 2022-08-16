@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add @types/iframe-resizer-react
+  C:\Program Files\nodejs\node.exe C:\Program Files (x86)\Yarn\bin\yarn.js add fgloadcss
 
 PATH: 
-  C:\Program Files\Python310\Scripts\;C:\Program Files\Python310\;C:\Program Files\Eclipse Adoptium\jre-17.0.3.7-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Microsoft VS Code\bin;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Program Files\erl-24.1.7\bin;C:\Program Files (x86)\Elixir\bin;C:\Users\Jacob\.mix\escripts;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\ProgramData\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin\;C:\Program Files (x86)\dotnet\;C:\Users\Jacob\AppData\Local\Microsoft\WindowsApps;C:\Users\Jacob\AppData\Roaming\npm;C:\ProgramData\nvm;C:\Program Files\nodejs;C:\Users\Jacob\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Jacob\AppData\Local\Yarn\bin;C:\Users\Jacob\.dotnet\tools
+  C:\Program Files\Python310\Scripts\;C:\Program Files\Python310\;C:\Program Files\Eclipse Adoptium\jre-17.0.3.7-hotspot\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\PuTTY\;C:\Program Files\Microsoft VS Code\bin;C:\ProgramData\chocolatey\bin;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Git\cmd;C:\Program Files\erl-24.1.7\bin;C:\Program Files (x86)\Elixir\bin;C:\Users\Jacob\.mix\escripts;C:\Program Files\dotnet\;C:\Program Files\Docker\Docker\resources\bin;C:\ProgramData\DockerDesktop\version-bin;C:\ProgramData\nvm;C:\Program Files\nodejs;C:\Program Files (x86)\Yarn\bin\;C:\Program Files (x86)\dotnet\;C:\Users\Jacob\AppData\Local\Microsoft\WindowsApps;C:\Users\Jacob\AppData\Roaming\npm;C:\Users\Jacob\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\Jacob\AppData\Local\Yarn\bin;C:\Users\Jacob\.dotnet\tools;C:\Users\Jacob\.fly\bin
 
 Yarn version: 
   1.22.19
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/@types%2fiframe-resizer-react: Not found
+  Error: https://registry.yarnpkg.com/fgloadcss: Not found
       at params.callback [as _callback] (C:\Program Files (x86)\Yarn\lib\cli.js:66145:18)
       at self.callback (C:\Program Files (x86)\Yarn\lib\cli.js:140890:22)
       at Request.emit (node:events:537:28)
@@ -28,10 +28,11 @@ Trace:
 
 npm manifest: 
   {
-    "name": "collab-bookmarks-bee3",
+    "name": "unified-bookmarks",
     "private": true,
     "sideEffects": false,
     "scripts": {
+      "prod": "cross-env NODE_ENV=production remix-serve ./build",
       "build": "run-s build:*",
       "build:css": "npm run generate:css -- --minify",
       "build:remix": "remix build",
@@ -69,6 +70,7 @@ npm manifest:
       "@remix-run/express": "^1.6.7",
       "@remix-run/node": "^1.6.7",
       "@remix-run/react": "^1.6.7",
+      "@remix-run/serve": "^1.6.8",
       "@remix-run/server-runtime": "^1.6.7",
       "bcryptjs": "^2.4.3",
       "compression": "^1.7.4",
@@ -78,9 +80,11 @@ npm manifest:
       "express": "^4.18.1",
       "iframe-resizer-react": "^1.1.0",
       "isbot": "^3.5.0",
+      "loadcss": "^0.0.2",
       "morgan": "^1.10.0",
       "react": "^18.2.0",
       "react-dom": "^18.2.0",
+      "theme-change": "^2.2.0",
       "tiny-invariant": "^1.2.0"
     },
     "devDependencies": {
@@ -1532,6 +1536,13 @@ Lockfile:
       eslint-plugin-react-hooks "^4.3.0"
       eslint-plugin-testing-library "^5.0.5"
   
+  "@remix-run/express@1.6.8":
+    version "1.6.8"
+    resolved "https://registry.yarnpkg.com/@remix-run/express/-/express-1.6.8.tgz#06ce62293cefe6dc29beb3f70336328908d0fe60"
+    integrity sha512-u8w6m8GCtMMRTFaiOblAZgbPMc15YDR66b2p07hquxUGk0W4TZUvan1nD6exzanWXCgY87CcXGabadTWjZGYig==
+    dependencies:
+      "@remix-run/node" "1.6.8"
+  
   "@remix-run/express@^1.6.7":
     version "1.6.7"
     resolved "https://registry.yarnpkg.com/@remix-run/express/-/express-1.6.7.tgz#958763cf9948d8e6598a01c4f6382ea8412c835b"
@@ -1554,6 +1565,21 @@ Lockfile:
       source-map-support "^0.5.21"
       stream-slice "^0.1.2"
   
+  "@remix-run/node@1.6.8":
+    version "1.6.8"
+    resolved "https://registry.yarnpkg.com/@remix-run/node/-/node-1.6.8.tgz#f27a2b051cc461eee51a0f420cdd1f4a14886167"
+    integrity sha512-+iq3l+VRlRWWZW9viNFKf1VGQeNUHdddH2Fvfd5DQ3p+/5A/0lVW87h99mn8UU6Qv6k27XOS1UcdRBgMfQNa8w==
+    dependencies:
+      "@remix-run/server-runtime" "1.6.8"
+      "@remix-run/web-fetch" "^4.1.3"
+      "@remix-run/web-file" "^3.0.2"
+      "@remix-run/web-stream" "^1.0.3"
+      "@web3-storage/multipart-parser" "^1.0.0"
+      abort-controller "^3.0.0"
+      cookie-signature "^1.1.0"
+      source-map-support "^0.5.21"
+      stream-slice "^0.1.2"
+  
   "@remix-run/react@^1.6.7":
     version "1.6.7"
     resolved "https://registry.yarnpkg.com/@remix-run/react/-/react-1.6.7.tgz#3018ba4fa3b43038b76cfe9abaa36e485bcaee74"
@@ -1563,10 +1589,33 @@ Lockfile:
       react-router-dom "^6.2.2"
       type-fest "^2.17.0"
   
+  "@remix-run/serve@^1.6.8":
+    version "1.6.8"
+    resolved "https://registry.yarnpkg.com/@remix-run/serve/-/serve-1.6.8.tgz#ade6260decf80220de4eb9133e2880eba74563d6"
+    integrity sha512-rWug1p4U7iqNxoQgDQSOPsBFnp4fFajtMMsFaZc6DYk9qzf2ApI1dy9rTzEXD+CczhYzgAlG8E8VNwn0wb4Wug==
+    dependencies:
+      "@remix-run/express" "1.6.8"
+      compression "^1.7.4"
+      express "^4.17.1"
+      morgan "^1.10.0"
+  
   "@remix-run/server-runtime@1.6.7", "@remix-run/server-runtime@^1.6.7":
     version "1.6.7"
     resolved "https://registry.yarnpkg.com/@remix-run/server-runtime/-/server-runtime-1.6.7.tgz#1c57bad74c5e26219104cf56c45d17ba8b8fb327"
     integrity sha512-7mn+zztDqTnM9XyFQmpPsiyYULtlSqcQN0ct82+tcWa6Wxp4he/3JcHwa9BQBKr500RSDDYpJKSByRIZB9kp1w==
+    dependencies:
+      "@types/cookie" "^0.4.0"
+      "@web3-storage/multipart-parser" "^1.0.0"
+      cookie "^0.4.1"
+      jsesc "3.0.2"
+      react-router-dom "^6.2.2"
+      set-cookie-parser "^2.4.8"
+      source-map "^0.7.3"
+  
+  "@remix-run/server-runtime@1.6.8":
+    version "1.6.8"
+    resolved "https://registry.yarnpkg.com/@remix-run/server-runtime/-/server-runtime-1.6.8.tgz#4f6a947bfe0955756ec06b030301398944a87367"
+    integrity sha512-GLegRhNshF8fGRXzDNBxVfE66j1hj3IDH4CF4pWssBzzwIpV1peRw/dBunAu/l4KtpYfaLG6kcz6LPch4pBB9Q==
     dependencies:
       "@types/cookie" "^0.4.0"
       "@web3-storage/multipart-parser" "^1.0.0"
@@ -2802,6 +2851,11 @@ Lockfile:
     dependencies:
       function-bind "^1.1.1"
       get-intrinsic "^1.0.2"
+  
+  callasync@^1.0.0:
+    version "1.0.2"
+    resolved "https://registry.yarnpkg.com/callasync/-/callasync-1.0.2.tgz#091d2c82c228bff69ba9b61a2d668281127ed350"
+    integrity sha512-SXmjXJXdcyaFlyflMCNlAYUyTmgA/OUYGI1TDBIxmvlC9Ur9mmw2wi3+lQYF1BxaWyh87Bb/3Yeo1oYgxBQttA==
   
   callsites@^3.0.0:
     version "3.1.0"
@@ -5906,6 +5960,13 @@ Lockfile:
       pify "^3.0.0"
       strip-bom "^3.0.0"
   
+  loadcss@^0.0.2:
+    version "0.0.2"
+    resolved "https://registry.yarnpkg.com/loadcss/-/loadcss-0.0.2.tgz#7939a44916cd26d8d03babaea5350af9c53ce5cd"
+    integrity sha512-XbBLDH1NQBJCOCDB78W/BSG3VK/2lq7Ec6AnDxrKJ5ICTmlkt5cx0Kf4lTQ1tPTREIdaLxSa8IQq/FGC7a8y+w==
+    dependencies:
+      callasync "^1.0.0"
+  
   loader-utils@^2.0.0:
     version "2.0.2"
     resolved "https://registry.yarnpkg.com/loader-utils/-/loader-utils-2.0.2.tgz#d6e3b4fb81870721ae4e0868ab11dd638368c129"
@@ -8488,6 +8549,11 @@ Lockfile:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
     integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
+  
+  theme-change@^2.2.0:
+    version "2.2.0"
+    resolved "https://registry.yarnpkg.com/theme-change/-/theme-change-2.2.0.tgz#dcc48ffe6b806258bc5f1caf8220527589e354c0"
+    integrity sha512-vvgZEEfmH3yZGq2bWHyzs2AOG1SRfNnCvWbEnPzGpdvvCmAWtOsEdg4H6k/OMapegG+LEQvQ76tQoN9B+FT7rg==
   
   then-request@^6.0.0:
     version "6.0.2"

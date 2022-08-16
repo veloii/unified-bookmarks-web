@@ -11,7 +11,7 @@ import { getUserId } from "~/session.server";
 
 import { useOptionalUser } from "~/utils";
 
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 import invariant from "tiny-invariant";
 
 export const meta: MetaFunction = () => {

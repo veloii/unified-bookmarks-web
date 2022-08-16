@@ -11,7 +11,7 @@ import { createUserSession, getUserId } from "~/session.server";
 import { verifyLogin } from "~/models/user.server";
 import { safeRedirect, validateEmail } from "~/utils";
 import Header from "~/components/Header";
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 
 export const meta: MetaFunction = () => {
   return {

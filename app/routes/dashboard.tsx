@@ -6,7 +6,7 @@ import { requireUserId } from "~/session.server";
 import { getTeams } from "~/models/team.server";
 import Navbar from "~/components/Navbar";
 
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 export { ErrorBoundary, CatchBoundary } from "~/components/Errors";
 
 export const meta: MetaFunction = () => {

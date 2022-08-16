@@ -8,7 +8,7 @@ import type { getTeam } from "~/models/team.server";
 import { banUser, kickUser, transferTeam } from "~/models/team.server";
 import { requireUserId } from "~/session.server";
 import { useMatchesData, useUser } from "~/utils";
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 
 type LoaderData = {
   team: NonNullable<Awaited<ReturnType<typeof getTeam>>>;

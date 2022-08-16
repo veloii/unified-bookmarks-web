@@ -6,6 +6,14 @@ import type { User } from "~/models/user.server";
 
 const DEFAULT_REDIRECT = "/";
 
+export function isServer() {
+  if (typeof window !== "undefined") {
+    return false;
+  } else {
+    return true;
+  }
+}
+
 /**
  * This should be used any time the redirect path is user-provided
  * (Like the query string on our login/signup pages). This avoids

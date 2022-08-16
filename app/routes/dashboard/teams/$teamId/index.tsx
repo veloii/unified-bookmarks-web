@@ -23,7 +23,7 @@ import {
 import { deleteTeam, getTeam, leaveTeam } from "~/models/team.server";
 import { requireUserId } from "~/session.server";
 import { useMatchesData, useUser } from "~/utils";
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 
 type CreateBookmarkActionData = {
   errors?: {

@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import logo from "~/branding/UNFull75px.png";
+import logo from "~/branding/UNFull75px.webp";
 
 export default function Footer() {
   return (

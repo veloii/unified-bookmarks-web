@@ -2,7 +2,7 @@ import type { ActionFunction, LoaderFunction } from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { logout } from "~/session.server";
 import type { MetaFunction } from "@remix-run/server-runtime";
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 
 export const meta: MetaFunction = () => {
   return {

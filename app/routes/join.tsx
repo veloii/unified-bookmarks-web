@@ -12,7 +12,7 @@ import { getUserId, createUserSession } from "~/session.server";
 import { createUser, getUserByEmail } from "~/models/user.server";
 import { safeRedirect, validateEmail } from "~/utils";
 
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 import Header from "~/components/Header";
 
 export const meta: MetaFunction = () => {

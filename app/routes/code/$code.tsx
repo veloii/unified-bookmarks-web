@@ -12,7 +12,7 @@ import * as React from "react";
 import type { Team } from "~/models/team.server";
 import { createTeam, joinTeam } from "~/models/team.server";
 import { requireUserId } from "~/session.server";
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 import Flow from "~/components/Flow";
 
 export const meta: MetaFunction = ({ parentsData }) => {

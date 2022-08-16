@@ -13,8 +13,8 @@ import {
   ViewGridIcon,
 } from "@heroicons/react/solid";
 import { useUser } from "~/utils";
-import Logo from "~/branding/UNFull75px.png";
-import LogoLight from "~/branding/UNFull75Lightpx.png";
+import Logo from "~/branding/UNFull75px.webp";
+import LogoLight from "~/branding/UNFull75Lightpx.webp";
 
 export default function Navbar(props: {
   children: React.ReactNode;
@@ -25,7 +25,7 @@ export default function Navbar(props: {
   const user = useUser();
 
   return (
-    <div className="drawer-mobile drawer min-h-screen">
+    <div className="drawer drawer-mobile min-h-screen">
       <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <div className="navbar bg-base-100 lg:hidden">

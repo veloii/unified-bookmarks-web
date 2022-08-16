@@ -6,7 +6,7 @@ import invariant from "tiny-invariant";
 import { editPassword, getUserById, verifyLogin } from "~/models/user.server";
 import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 import ThemePicker from "~/components/ThemePicker";
 
 type ActionData = {

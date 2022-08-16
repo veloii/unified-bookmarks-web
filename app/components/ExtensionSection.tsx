@@ -1,13 +1,14 @@
-import screenshot1 from "~/screenshots/s3.png";
-import screenshot2 from "~/screenshots/s4.png";
-import screenshot3 from "~/screenshots/s5.png";
-import screenshot4 from "~/screenshots/s6.png";
-import screenshot5 from "~/screenshots/s7.png";
-import chrome from "~/screenshots/unified.png";
-import bookmarks from "~/screenshots/bookmarks.png";
+import screenshot1 from "~/screenshots/s3.webp";
+import screenshot2 from "~/screenshots/s4.webp";
+import screenshot3 from "~/screenshots/s5.webp";
+import screenshot4 from "~/screenshots/s6.webp";
+import screenshot5 from "~/screenshots/s7.webp";
+import chrome from "~/screenshots/unified.webp";
+import bookmarks from "~/screenshots/bookmarks.webp";
+import { Image } from "remix-image";
 import { ArrowDownIcon } from "@heroicons/react/solid";
 import { useState } from "react";
-import bg from "~/screenshots/bg.png";
+import bg from "~/screenshots/bg.webp";
 
 export default function ExtensionSection() {
   const [active, setActive] = useState<number>(0);

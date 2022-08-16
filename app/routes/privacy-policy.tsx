@@ -1,7 +1,7 @@
 import Footer from "~/components/Footer";
 import Header from "~/components/Header";
 import type { MetaFunction } from "@remix-run/server-runtime";
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 
 export const meta: MetaFunction = () => {
   return {

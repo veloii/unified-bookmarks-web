@@ -3,7 +3,7 @@ import { MetaFunction } from "@remix-run/server-runtime";
 import { useEffect } from "react";
 import type { getTeams } from "~/models/team.server";
 import { useMatchesData, useUser } from "~/utils";
-import logo from "~/branding/UN.png";
+import logo from "~/branding/UN.webp";
 
 export const meta: MetaFunction = ({ parentsData }) => {
   return parentsData.root.user

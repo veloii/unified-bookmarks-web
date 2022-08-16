@@ -12,26 +12,24 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
-  useFetcher,
 } from "@remix-run/react";
 
+import { loadCSS } from "fg-loadcss";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import globalsStylesheetUrl from "./styles/globals.css";
 import { getUser } from "./session.server";
 import Flow from "./components/Flow";
 import { useEffect } from "react";
+import { isServer } from "./utils";
 export { ErrorBoundary, CatchBoundary } from "./components/ErrorsBrand";
 
-export const links: LinksFunction = () => {
-  return [
-    { rel: "stylesheet", href: tailwindStylesheetUrl },
-    { rel: "stylesheet", href: globalsStylesheetUrl },
-    {
-      rel: "stylesheet",
-      href: "https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap",
-    },
-  ];
-};
+if (!isServer()) {
+  loadCSS(tailwindStylesheetUrl);
+  loadCSS(globalsStylesheetUrl);
+  loadCSS(
+    "https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap"
+  );
+}
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",

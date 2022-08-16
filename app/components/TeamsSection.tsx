@@ -1,5 +1,5 @@
-import screenshot from "~/screenshots/s1.png";
-import screenshot2 from "~/screenshots/s2.png";
+import screenshot from "~/screenshots/s1.webp";
+import screenshot2 from "~/screenshots/s2.webp";
 
 export default function TeamsSection() {
   return (
