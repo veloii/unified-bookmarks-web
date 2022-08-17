@@ -1,4 +1,4 @@
-import { PlusCircleIcon, XIcon } from "@heroicons/react/solid";
+import { ArrowUpIcon, PlusCircleIcon, XIcon } from "@heroicons/react/solid";
 import {
   Form,
   Link,
@@ -12,7 +12,7 @@ import type {
   MetaFunction,
 } from "@remix-run/server-runtime";
 import { redirect, json } from "@remix-run/server-runtime";
-import React from "react";
+import React, { useContext } from "react";
 import { useRef, useState } from "react";
 import invariant from "tiny-invariant";
 import {
@@ -24,6 +24,7 @@ import { deleteTeam, getTeam, leaveTeam } from "~/models/team.server";
 import { requireUserId } from "~/session.server";
 import { useMatchesData, useUser } from "~/utils";
 import logo from "~/branding/UN.webp";
+import { TourContext } from "~/contexts/TourContext";
 
 type CreateBookmarkActionData = {
   errors?: {
@@ -110,6 +111,7 @@ export default function BookmarkIndexPage() {
   const copyToClipboardRef = useRef<HTMLButtonElement>(null);
   const data = useMatchesData("routes/dashboard/teams/$teamId") as LoaderData;
   const user = useUser();
+  const { tour, setTour } = useContext(TourContext);
   const owner = data.team.owner.id === user.id;
   const actionData = useActionData() as CreateBookmarkActionData;
   const nameRef = React.useRef<HTMLInputElement>(null);
@@ -130,11 +132,14 @@ export default function BookmarkIndexPage() {
             {data.team.users.length} Member{data.team.users.length !== 1 && "s"}
           </p>
         </div>
-        <div className="flex gap-5">
+        <div className="flex gap-5 overflow-auto pb-3">
           <label
-            onClick={() => setCodeType("link")}
+            onClick={() => {
+              setTour(3);
+              setCodeType("link");
+            }}
             htmlFor="invite"
-            className="btn btn-primary"
+            className={`btn btn-primary ${tour === 2 && "animate-pulse"}`}
           >
             Invite Member with link
           </label>

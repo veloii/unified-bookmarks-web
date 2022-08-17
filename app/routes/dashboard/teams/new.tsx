@@ -112,20 +112,20 @@ export default function NewTeamPage() {
     if (actionData?.errors?.join) joinRef.current?.focus();
   }, [actionData]);
   return (
-    <>
+    <div className="flex flex-col items-center gap-10 p-2 lg:flex-row">
       <Form
         method="post"
         action="/dashboard/teams/new"
+        className="w-full lg:w-[350px]"
         style={{
           display: "flex",
           flexDirection: "column",
           gap: 8,
-          width: "100%",
         }}
       >
         <div className="space-y-5 p-5">
           <h1 className="text-3xl font-black">Create Team</h1>
-          <div className="form-control w-full max-w-xs">
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Name</span>
             </label>
@@ -141,7 +141,7 @@ export default function NewTeamPage() {
               placeholder="Type here"
               ref={nameRef}
               name="name"
-              className={`input input-bordered w-full max-w-xs ${
+              className={`input input-bordered w-full ${
                 actionData?.errors?.name && "input-error"
               }`}
               aria-invalid={actionData?.errors?.name ? true : undefined}
@@ -160,19 +160,22 @@ export default function NewTeamPage() {
           </div>
         </div>
       </Form>
+      <div className="flex h-32 w-32 items-center justify-center rounded-full bg-base-300 text-3xl font-black text-base-content">
+        or
+      </div>
       <Form
         method="post"
         action="/dashboard/teams/new"
+        className="w-full lg:w-[350px]"
         style={{
           display: "flex",
           flexDirection: "column",
           gap: 8,
-          width: "100%",
         }}
       >
         <div className="space-y-5 p-5">
-          <h1 className="text-3xl font-black">Someone invited you?</h1>
-          <div className="form-control w-full max-w-xs">
+          <h1 className="text-3xl font-black">Join Team</h1>
+          <div className="form-control w-full">
             <label className="label">
               <span className="label-text">Invite Code</span>
             </label>
@@ -184,11 +187,11 @@ export default function NewTeamPage() {
               type="text"
             />
             <input
-              type="text"
+              type="password"
               placeholder="Type here"
               ref={joinRef}
               name="join"
-              className={`input input-bordered w-full max-w-xs ${
+              className={`input input-bordered w-full ${
                 actionData?.errors?.join && "input-error"
               }`}
               aria-invalid={actionData?.errors?.join ? true : undefined}
@@ -207,6 +210,6 @@ export default function NewTeamPage() {
           </div>
         </div>
       </Form>
-    </>
+    </div>
   );
 }

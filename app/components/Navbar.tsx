@@ -1,6 +1,6 @@
 import { Team } from "@prisma/client";
 import { Link, NavLink, useSubmit } from "@remix-run/react";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getTeams } from "~/models/team.server";
 import {
   BellIcon,
@@ -15,6 +15,8 @@ import {
 import { useUser } from "~/utils";
 import Logo from "~/branding/UNFull75px.webp";
 import LogoLight from "~/branding/UNFull75Lightpx.webp";
+import { TourContext } from "~/contexts/TourContext";
+import Flow1 from "./Flow1";
 
 export default function Navbar(props: {
   children: React.ReactNode;
@@ -23,9 +25,13 @@ export default function Navbar(props: {
   const submit = useSubmit();
   const [logoutWarning, setLogoutWarning] = useState(false);
   const user = useUser();
+  const { tour, setTour } = useContext(TourContext);
+  useEffect(() => {
+    if (tour === true) setTour(1);
+  }, [tour]);
 
   return (
-    <div className="drawer drawer-mobile min-h-screen">
+    <div className="drawer-mobile drawer min-h-screen">
       <input id="navbar-drawer" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
         <div className="navbar bg-base-100 lg:hidden">
@@ -35,6 +41,9 @@ export default function Navbar(props: {
               tabIndex={0}
               className="btn btn-ghost btn-circle"
             >
+              {tour === 1 && (
+                <div className="badge badge-primary absolute animate-ping"></div>
+              )}
               <MenuAlt2Icon width={20} className="mx-auto" />
             </label>
           </div>
@@ -91,17 +100,20 @@ export default function Navbar(props: {
               </li>
               {props.teams
                 .filter((team) => team.owner.id === user.id)
-                .map((team) => (
-                  <li key={team.id}>
-                    <NavLink
-                      className={({ isActive }) =>
-                        ` ${isActive ? "active" : ""}`
-                      }
-                      to={`/dashboard/teams/${team.id}`}
-                    >
-                      {team.name}
-                    </NavLink>
-                  </li>
+                .map((team, idx) => (
+                  <>
+                    <li key={team.id}>
+                      <NavLink
+                        className={({ isActive }) =>
+                          ` ${isActive ? "active" : ""}`
+                        }
+                        to={`/dashboard/teams/${team.id}`}
+                      >
+                        {team.name}
+                      </NavLink>
+                    </li>
+                    {idx === 0 && tour === 1 && <Flow1 />}
+                  </>
                 ))}
             </div>
           )}
@@ -113,17 +125,20 @@ export default function Navbar(props: {
               </li>
               {props.teams
                 .filter((team) => team.owner.id !== user.id)
-                .map((team) => (
-                  <li key={team.id}>
-                    <NavLink
-                      className={({ isActive }) =>
-                        ` ${isActive ? "active" : ""}`
-                      }
-                      to={`/dashboard/teams/${team.id}`}
-                    >
-                      {team.name}
-                    </NavLink>
-                  </li>
+                .map((team, idx) => (
+                  <>
+                    <li key={team.id}>
+                      <NavLink
+                        className={({ isActive }) =>
+                          ` ${isActive ? "active" : ""}`
+                        }
+                        to={`/dashboard/teams/${team.id}`}
+                      >
+                        {team.name}
+                      </NavLink>
+                    </li>
+                    {idx === 0 && tour === 1 && <Flow1 />}
+                  </>
                 ))}
             </div>
           )}
