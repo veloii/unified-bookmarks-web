@@ -39,13 +39,13 @@ export default function Flow() {
   const showFlow = () => {
     if (tour) return false;
     if (page !== 0) return true;
-    if (data.teams.length === 0) return true;
+    if (data?.teams.length === 0) return true;
     if (close) return false;
     return false;
   };
 
   useEffect(() => {
-    if (tour === 1 && pathname.includes(data.teams[0].id)) setTour(2);
+    if (tour === 1 && pathname.includes(data?.teams[0].id)) setTour(2);
   }, [tour, pathname]);
 
   useEffect(() => {
