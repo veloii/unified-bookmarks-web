@@ -129,16 +129,12 @@ export default function Flow() {
             initial={{
               height: page1.current?.offsetHeight,
               width: page1.current?.offsetWidth,
-              scale: "0",
-              opacity: "100%",
             }}
             animate={{
               height: "auto",
               width: "60rem",
-              opacity: showFlow() ? "100%" : "0%",
-              scale: showFlow() ? "1" : "0.9",
             }}
-            className="modal-box max-w-5xl overflow-hidden p-0 opacity-0"
+            className="modal-box max-w-5xl overflow-hidden p-0 "
             ref={page2}
           >
             <motion.div {...fadeIn} className="p-5">
@@ -152,16 +148,12 @@ export default function Flow() {
             initial={{
               height: page2.current?.offsetHeight,
               width: page2.current?.offsetWidth,
-              scale: "0",
-              opacity: "100%",
             }}
             animate={{
               height: "auto",
               width: "30rem",
-              opacity: showFlow() ? "100%" : "0%",
-              scale: showFlow() ? "1" : "0.9",
             }}
-            className="modal-box max-w-5xl overflow-hidden p-0 opacity-0"
+            className="modal-box max-w-5xl overflow-hidden p-0 "
             ref={page3}
           >
             <motion.div {...fadeIn} className="p-5">
