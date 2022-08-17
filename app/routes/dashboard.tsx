@@ -7,6 +7,7 @@ import { getTeams } from "~/models/team.server";
 import Navbar from "~/components/Navbar";
 
 import logo from "~/branding/UN.webp";
+import Flow from "~/components/Flow";
 export { ErrorBoundary, CatchBoundary } from "~/components/Errors";
 
 export const meta: MetaFunction = () => {
@@ -34,10 +35,13 @@ export default function TeamsPage() {
   const data = useLoaderData<any>() as LoaderData;
 
   return (
-    <div className="flex h-full min-h-screen flex-col divide-y-2 divide-base-200">
-      <Navbar teams={data.teams}>
-        <Outlet />
-      </Navbar>
-    </div>
+    <>
+      <Flow />
+      <div className="flex h-full min-h-screen flex-col divide-y-2 divide-base-200">
+        <Navbar teams={data.teams}>
+          <Outlet />
+        </Navbar>
+      </div>
+    </>
   );
 }
