@@ -37,10 +37,10 @@ export default function Flow() {
   const { tour, setTour } = useContext(TourContext);
 
   const showFlow = () => {
+    if (close) return false;
     if (tour) return false;
     if (page !== 0) return true;
     if (data?.teams.length === 0) return true;
-    if (close) return false;
     return false;
   };
 
