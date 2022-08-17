@@ -143,12 +143,6 @@ export default function Flow() {
           >
             <motion.div {...fadeIn} className="p-5">
               <NewTeamPage />
-              <button
-                className="btn btn-ghost text-primary"
-                onClick={() => setPage(2)}
-              >
-                Skip
-              </button>
             </motion.div>
           </motion.div>
         )}
