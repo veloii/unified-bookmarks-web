@@ -65,7 +65,7 @@ export default function Flow() {
         setFlow(false);
       }, 1000);
     }
-  }, [page, tour, data]);
+  }, [page, tour, data, close]);
 
   return (
     <>
