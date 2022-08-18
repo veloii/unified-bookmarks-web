@@ -1,8 +1,20 @@
 import { Link, Links, Meta, Scripts, useCatch } from "@remix-run/react";
 import type { ErrorBoundaryComponent } from "@remix-run/server-runtime";
+import { loadCSS } from "fg-loadcss";
+import { isServer } from "~/utils";
 import Header from "./Header";
+import globalsStylesheetUrl from "~/styles/globals.css";
+import { useEffect } from "react";
 
 export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
+  useEffect(() => {
+    loadCSS("https://rsms.me/inter/inter.css");
+    loadCSS(
+      "https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    );
+    loadCSS(globalsStylesheetUrl);
+  }, []);
+
   console.error(error);
   return (
     <html className="bg-white">
@@ -32,6 +44,13 @@ export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
 };
 
 export function CatchBoundary() {
+  useEffect(() => {
+    loadCSS("https://rsms.me/inter/inter.css");
+    loadCSS(
+      "https://fonts.googleapis.com/css2?family=Lexend:wght@100;200;300;400;500;600;700;800;900&display=swap"
+    );
+    loadCSS(globalsStylesheetUrl);
+  }, []);
   const caught = useCatch();
   return (
     <html className="bg-white">
