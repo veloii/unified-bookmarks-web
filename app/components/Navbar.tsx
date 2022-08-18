@@ -101,8 +101,8 @@ export default function Navbar(props: {
               {props.teams
                 .filter((team) => team.owner.id === user.id)
                 .map((team, idx) => (
-                  <>
-                    <li key={team.id}>
+                  <React.Fragment key={team.id}>
+                    <li>
                       <NavLink
                         className={({ isActive }) =>
                           ` ${isActive ? "active" : ""}`
@@ -113,7 +113,7 @@ export default function Navbar(props: {
                       </NavLink>
                     </li>
                     {idx === 0 && tour === 1 && <Flow1 />}
-                  </>
+                  </React.Fragment>
                 ))}
             </div>
           )}
@@ -126,8 +126,8 @@ export default function Navbar(props: {
               {props.teams
                 .filter((team) => team.owner.id !== user.id)
                 .map((team, idx) => (
-                  <>
-                    <li key={team.id}>
+                  <React.Fragment key={team.id}>
+                    <li>
                       <NavLink
                         className={({ isActive }) =>
                           ` ${isActive ? "active" : ""}`
@@ -138,7 +138,7 @@ export default function Navbar(props: {
                       </NavLink>
                     </li>
                     {idx === 0 && tour === 1 && <Flow1 />}
-                  </>
+                  </React.Fragment>
                 ))}
             </div>
           )}

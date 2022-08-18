@@ -1,4 +1,4 @@
-# fly.toml file generated for unified-bookmarks on 2022-08-16T12:14:36+01:00
+# fly.toml file generated for unified-bookmarks on 2022-08-17T21:53:51+01:00
 
 app = "unified-bookmarks"
 kill_signal = "SIGINT"

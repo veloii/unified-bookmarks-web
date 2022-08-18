@@ -13,6 +13,10 @@ export async function getUserByEmail(email: User["email"]) {
   return prisma.user.findUnique({ where: { email } });
 }
 
+export async function deleteUser(id: User["id"]) {
+  return prisma.user.delete({where: {id}})
+}
+
 export async function editPassword(id: User["id"], password: string) {
   const hashedPassword = await bcrypt.hash(password, 10);
 

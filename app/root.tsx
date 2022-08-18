@@ -18,10 +18,15 @@ import { loadCSS } from "fg-loadcss";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import globalsStylesheetUrl from "./styles/globals.css";
 import { getUser } from "./session.server";
-import Flow from "./components/Flow";
 import { useEffect, useState } from "react";
 import { isServer } from "./utils";
 import { Tour, TourContextProvider } from "./contexts/TourContext";
+import Modals from "./components/Modals";
+import {
+  PasswordActionData,
+  PasswordActionDataContextProvider,
+} from "./contexts/PasswordActionDataContext";
+import Toasts from "./components/Toasts";
 export { ErrorBoundary, CatchBoundary } from "./components/ErrorsBrand";
 
 if (!isServer()) {
@@ -56,25 +61,33 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function App() {
   const [tour, setTour] = useState<Tour>(false);
+  const [passwordActionData, setPasswordActionData] =
+    useState<PasswordActionData>();
 
   useEffect(() => {
     themeChange(false);
   }, []);
 
   return (
-    <TourContextProvider value={{ tour, setTour }}>
-      <html lang="en" className="h-full overflow-x-hidden">
-        <head>
-          <Meta />
-          <Links />
-        </head>
-        <body className="h-full">
-          <Outlet />
-          <LiveReload />
-          <ScrollRestoration />
-          <Scripts />
-        </body>
-      </html>
-    </TourContextProvider>
+    <PasswordActionDataContextProvider
+      value={{ passwordActionData, setPasswordActionData }}
+    >
+      <TourContextProvider value={{ tour, setTour }}>
+        <html lang="en" className="h-full overflow-x-hidden">
+          <head>
+            <Meta />
+            <Links />
+          </head>
+          <body className="h-full">
+            <Toasts />
+            <Modals />
+            <Outlet />
+            <LiveReload />
+            <ScrollRestoration />
+            <Scripts />
+          </body>
+        </html>
+      </TourContextProvider>
+    </PasswordActionDataContextProvider>
   );
 }
