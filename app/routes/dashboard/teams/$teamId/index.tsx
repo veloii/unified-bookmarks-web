@@ -6,7 +6,7 @@ import { useRef, useState } from "react";
 import invariant from "tiny-invariant";
 import type { getBookmarks } from "~/models/bookmarks.server";
 import { createBookmark, deleteBookmark } from "~/models/bookmarks.server";
-import type { getTeam } from "~/models/team.server";
+import { getTeam, resetCode } from "~/models/team.server";
 import { deleteTeam, leaveTeam } from "~/models/team.server";
 import { requireUserId } from "~/session.server";
 import { useMatchesData, useUser } from "~/utils";
@@ -88,6 +88,9 @@ export const action: ActionFunction = async ({ request, params }) => {
     const id = formData.get("id");
     invariant(id, "id not found");
     await deleteBookmark({ userId, id: id.toString() });
+  }
+  if (option === "reset_code") {
+    await resetCode({ id: params.teamId, userId });
   }
 
   return null;

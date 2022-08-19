@@ -13,7 +13,7 @@ import { requireUserId } from "~/session.server";
 import { useUser } from "~/utils";
 import logo from "~/branding/UN.webp";
 import ThemePicker from "~/components/ThemePicker";
-import { PasswordActionDataContext } from "~/contexts/PasswordActionDataContext";
+import { ModalContext } from "~/contexts/ModalContext";
 
 type ActionData = {
   errors?: {
@@ -91,11 +91,12 @@ export const meta: MetaFunction = ({ parentsData }) => {
 
 export default function Settings() {
   const user = useUser();
-  const submit = useSubmit();
   const actionData = useActionData() as ActionData;
-  const { setPasswordActionData } = useContext(PasswordActionDataContext);
+  const { setModal, modal } = useContext(ModalContext);
   useEffect(() => {
-    setPasswordActionData(actionData);
+    const copy = { ...modal };
+    copy.passwordActionData = actionData;
+    setModal(copy);
   }, [actionData]);
 
   return (

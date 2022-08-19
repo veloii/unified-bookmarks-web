@@ -3,10 +3,12 @@ import { json } from "@remix-run/node";
 import { Outlet, useLoaderData } from "@remix-run/react";
 
 import { requireUserId } from "~/session.server";
-import { getTeam, getTeams } from "~/models/team.server";
+import type { Team } from "~/models/team.server";
+import { getTeam } from "~/models/team.server";
 import { getBookmarks } from "~/models/bookmarks.server";
 import invariant from "tiny-invariant";
-import { TeamModals } from "~/components/modals";
+import { useContext, useEffect } from "react";
+import { ModalContext } from "~/contexts/ModalContext";
 
 type LoaderData = {
   team: NonNullable<Awaited<ReturnType<typeof getTeam>>>;
@@ -26,9 +28,15 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 export default function TeamsPage() {
+  const data = useLoaderData<LoaderData>();
+  const { setModal, modal } = useContext(ModalContext);
+  useEffect(() => {
+    const copy = { ...modal };
+    modal!.team = data.team as unknown as Team;
+    setModal(copy);
+  });
   return (
     <>
-      <TeamModals />
       <Outlet />
     </>
   );

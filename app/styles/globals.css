@@ -43,7 +43,7 @@ html {
   color: #000 !important;
 }
 
-.btn {
+.btn:not(.btn-sm):not(.btn-lg):not(.btn-xl) {
   height: 2.5rem;
   min-height: 2.5rem;
 }

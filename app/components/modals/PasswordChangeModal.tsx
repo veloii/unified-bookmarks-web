@@ -2,24 +2,24 @@ import { ArrowLeftIcon } from "@heroicons/react/solid";
 import { Form, useActionData, useSubmit } from "@remix-run/react";
 import React, { useContext } from "react";
 import { toast } from "react-hot-toast/headless";
-import { PasswordActionDataContext } from "~/contexts/PasswordActionDataContext";
+import { ModalContext } from "~/contexts/ModalContext";
 
 export default function PasswordChangeModal() {
-  const { passwordActionData } = useContext(PasswordActionDataContext);
+  const { modal } = useContext(ModalContext);
   const oldPassRef = React.useRef<HTMLInputElement>(null);
   const newPassRef = React.useRef<HTMLInputElement>(null);
   const backRef = React.useRef<HTMLLabelElement>(null);
 
   React.useEffect(() => {
-    if (passwordActionData?.success?.password) {
+    if (modal?.passwordActionData?.success?.password) {
       backRef.current!.click();
       toast("Password successfully updated", { className: "alert-success" });
       oldPassRef.current!.value = "";
       newPassRef.current!.value = "";
     }
-    if (passwordActionData?.errors?.oldPass) oldPassRef.current?.focus();
-    if (passwordActionData?.errors?.newPass) newPassRef.current?.focus();
-  }, [passwordActionData]);
+    if (modal?.passwordActionData?.errors?.oldPass) oldPassRef.current?.focus();
+    if (modal?.passwordActionData?.errors?.newPass) newPassRef.current?.focus();
+  }, [modal?.passwordActionData]);
 
   return (
     <>
@@ -38,20 +38,22 @@ export default function PasswordChangeModal() {
                   ref={oldPassRef}
                   name="oldPass"
                   className={`input input-bordered w-full ${
-                    passwordActionData?.errors?.oldPass && "input-error"
+                    modal?.passwordActionData?.errors?.oldPass && "input-error"
                   }`}
                   aria-invalid={
-                    passwordActionData?.errors?.oldPass ? true : undefined
+                    modal?.passwordActionData?.errors?.oldPass
+                      ? true
+                      : undefined
                   }
                   aria-errormessage={
-                    passwordActionData?.errors?.oldPass
+                    modal?.passwordActionData?.errors?.oldPass
                       ? "oldPass-error"
                       : undefined
                   }
                 />
                 <label className="label">
                   <span className="label-text-alt text-error">
-                    {passwordActionData?.errors?.oldPass}
+                    {modal?.passwordActionData?.errors?.oldPass}
                     {"⠀"}
                   </span>
                 </label>
@@ -73,20 +75,22 @@ export default function PasswordChangeModal() {
                   ref={newPassRef}
                   name="newPass"
                   className={`input input-bordered w-full ${
-                    passwordActionData?.errors?.newPass && "input-error"
+                    modal?.passwordActionData?.errors?.newPass && "input-error"
                   }`}
                   aria-invalid={
-                    passwordActionData?.errors?.newPass ? true : undefined
+                    modal?.passwordActionData?.errors?.newPass
+                      ? true
+                      : undefined
                   }
                   aria-errormessage={
-                    passwordActionData?.errors?.newPass
+                    modal?.passwordActionData?.errors?.newPass
                       ? "newPass-error"
                       : undefined
                   }
                 />
                 <label className="label">
                   <span className="label-text-alt text-error">
-                    {passwordActionData?.errors?.newPass}
+                    {modal?.passwordActionData?.errors?.newPass}
                     {"⠀"}
                   </span>
                 </label>

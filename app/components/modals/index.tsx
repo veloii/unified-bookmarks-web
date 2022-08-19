@@ -7,13 +7,6 @@ export function Modals() {
     <>
       <PasswordChangeModal />
       <DeleteAccountModal />
-    </>
-  );
-}
-
-export function TeamModals() {
-  return (
-    <>
       <InviteMemberModal />
     </>
   );

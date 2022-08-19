@@ -23,9 +23,9 @@ import { isServer } from "./utils";
 import type { Tour } from "./contexts/TourContext";
 import { TourContextProvider } from "./contexts/TourContext";
 import { Modals } from "~/components/modals";
-import type { PasswordActionData } from "./contexts/PasswordActionDataContext";
-import { PasswordActionDataContextProvider } from "./contexts/PasswordActionDataContext";
 import Toasts from "./components/Toasts";
+import type { Modal } from "./contexts/ModalContext";
+import { ModalContextProvider } from "./contexts/ModalContext";
 export { ErrorBoundary, CatchBoundary } from "./components/ErrorsBrand";
 
 if (!isServer()) {
@@ -66,8 +66,10 @@ export const loader: LoaderFunction = async ({ request }) => {
 
 export default function App() {
   const [tour, setTour] = useState<Tour>(false);
-  const [passwordActionData, setPasswordActionData] =
-    useState<PasswordActionData>();
+  const [modal, setModal] = useState<Modal>({
+    passwordActionData: {},
+    team: undefined,
+  });
 
   useEffect(() => {
     themeChange(false);
@@ -76,9 +78,7 @@ export default function App() {
   const data = useLoaderData();
 
   return (
-    <PasswordActionDataContextProvider
-      value={{ passwordActionData, setPasswordActionData }}
-    >
+    <ModalContextProvider value={{ modal, setModal }}>
       <TourContextProvider value={{ tour, setTour }}>
         <html lang="en" className="h-full overflow-x-hidden">
           <head>
@@ -100,6 +100,6 @@ export default function App() {
           </body>
         </html>
       </TourContextProvider>
-    </PasswordActionDataContextProvider>
+    </ModalContextProvider>
   );
 }
