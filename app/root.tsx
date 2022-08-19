@@ -12,6 +12,7 @@ import {
   Outlet,
   Scripts,
   ScrollRestoration,
+  useLoaderData,
 } from "@remix-run/react";
 import { loadCSS } from "fg-loadcss";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
@@ -49,11 +50,17 @@ export const meta: MetaFunction = () => ({
 
 type LoaderData = {
   user: Awaited<ReturnType<typeof getUser>>;
+  ENV: {
+    CHROME_EXTENSION_URL: string;
+  };
 };
 
 export const loader: LoaderFunction = async ({ request }) => {
   return json<LoaderData>({
     user: await getUser(request),
+    ENV: {
+      CHROME_EXTENSION_URL: process.env.CHROME_EXTENSION_URL!.toString(),
+    },
   });
 };
 
@@ -65,6 +72,8 @@ export default function App() {
   useEffect(() => {
     themeChange(false);
   }, []);
+
+  const data = useLoaderData();
 
   return (
     <PasswordActionDataContextProvider
@@ -83,6 +92,11 @@ export default function App() {
             <LiveReload />
             <ScrollRestoration />
             <Scripts />
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+              }}
+            />
           </body>
         </html>
       </TourContextProvider>

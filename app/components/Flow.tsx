@@ -165,7 +165,16 @@ export default function Flow() {
                 from the bookmark bar.
               </p>
               <div className="modal-action">
-                <a target="_blank" className="btn btn-primary">
+                <a
+                  href={
+                    typeof window !== "undefined"
+                      ? (window as any).ENV.CHROME_EXTENSION_URL
+                      : process.env.CHROME_EXTENSION_URL
+                  }
+                  target="_blank"
+                  className="btn btn-primary"
+                  rel="noreferrer"
+                >
                   Install
                 </a>
                 <button

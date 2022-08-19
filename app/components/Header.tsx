@@ -34,7 +34,17 @@ export default function Header() {
                 <Link to="/privacy-policy">Privacy Policy</Link>
               </li>
               <li>
-                <a>Chrome Extension</a>
+                <a
+                  target="_blank"
+                  href={
+                    typeof window !== "undefined"
+                      ? (window as any).ENV.CHROME_EXTENSION_URL
+                      : process.env.CHROME_EXTENSION_URL
+                  }
+                  rel="noreferrer"
+                >
+                  Chrome Extension
+                </a>
               </li>
             </ul>
           </div>
@@ -49,7 +59,17 @@ export default function Header() {
               <Link to="/privacy-policy">Privacy Policy</Link>
             </li>
             <li>
-              <a>Chrome Extension</a>
+              <a
+                target="_blank"
+                href={
+                  typeof window !== "undefined"
+                    ? (window as any).ENV.CHROME_EXTENSION_URL
+                    : process.env.CHROME_EXTENSION_URL
+                }
+                rel="noreferrer"
+              >
+                Chrome Extension
+              </a>
             </li>
           </ul>
         </div>
