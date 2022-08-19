@@ -1,30 +1,18 @@
-import { ArrowUpIcon, PlusCircleIcon, XIcon } from "@heroicons/react/solid";
-import {
-  Form,
-  Link,
-  useActionData,
-  useLoaderData,
-  useSubmit,
-} from "@remix-run/react";
-import type {
-  LoaderFunction,
-  ActionFunction,
-  MetaFunction,
-} from "@remix-run/server-runtime";
+import { Link, useActionData, useSubmit } from "@remix-run/react";
+import type { ActionFunction, MetaFunction } from "@remix-run/server-runtime";
 import { redirect, json } from "@remix-run/server-runtime";
 import React, { useContext } from "react";
 import { useRef, useState } from "react";
 import invariant from "tiny-invariant";
-import {
-  createBookmark,
-  deleteBookmark,
-  getBookmarks,
-} from "~/models/bookmarks.server";
-import { deleteTeam, getTeam, leaveTeam } from "~/models/team.server";
+import type { getBookmarks } from "~/models/bookmarks.server";
+import { createBookmark, deleteBookmark } from "~/models/bookmarks.server";
+import type { getTeam } from "~/models/team.server";
+import { deleteTeam, leaveTeam } from "~/models/team.server";
 import { requireUserId } from "~/session.server";
 import { useMatchesData, useUser } from "~/utils";
 import logo from "~/branding/UN.webp";
 import { TourContext } from "~/contexts/TourContext";
+import BookmarkManager from "~/components/BookmarkManager";
 
 type CreateBookmarkActionData = {
   errors?: {
@@ -108,20 +96,10 @@ export const action: ActionFunction = async ({ request, params }) => {
 export default function BookmarkIndexPage() {
   const submit = useSubmit();
   const [confirm, setConfirm] = useState(false);
-  const copyToClipboardRef = useRef<HTMLButtonElement>(null);
   const data = useMatchesData("routes/dashboard/teams/$teamId") as LoaderData;
   const user = useUser();
   const { tour, setTour } = useContext(TourContext);
   const owner = data.team.owner.id === user.id;
-  const actionData = useActionData() as CreateBookmarkActionData;
-  const nameRef = React.useRef<HTMLInputElement>(null);
-  const linkRef = React.useRef<HTMLInputElement>(null);
-  const [codeType, setCodeType] = useState<"code" | "link">("code");
-
-  React.useEffect(() => {
-    if (actionData?.errors?.name) nameRef.current?.focus();
-    if (actionData?.errors?.link) linkRef.current?.focus();
-  }, [actionData]);
 
   return (
     <div className="flex h-full flex-col divide-x-2 divide-base-100 ">
@@ -133,63 +111,18 @@ export default function BookmarkIndexPage() {
           </p>
         </div>
         <div className="flex gap-5 overflow-auto pb-3">
+          <Link to="users">
+            <button className="btn btn-info">Manage Users</button>
+          </Link>
           <label
             onClick={() => {
-              setTour(3);
-              setCodeType("link");
+              if (tour === 2) setTour(3);
             }}
             htmlFor="invite"
             className={`btn btn-primary ${tour === 2 && "animate-pulse"}`}
           >
-            Invite Member with link
+            Invite Member
           </label>
-          <label
-            onClick={() => setCodeType("code")}
-            htmlFor="invite"
-            className="btn btn-primary"
-          >
-            Invite Member with code
-          </label>
-          <input type="checkbox" id="invite" className="modal-toggle" />
-          <div className="modal">
-            <div className="modal-box">
-              <h3 className="text-lg font-bold">Invite {codeType}</h3>
-              <kbd className="kbd mt-4">
-                {codeType === "code"
-                  ? data.team.code
-                  : `https://unifiedbookmarks.com/code/${data.team.code}`}
-              </kbd>
-
-              <div className="modal-action">
-                <button
-                  onClick={() => {
-                    navigator.clipboard.writeText(
-                      codeType === "code"
-                        ? data.team.code
-                        : `https://unifiedbookmarks.com/code/${data.team.code}`
-                    );
-                    copyToClipboardRef.current!.innerText = "Copied!";
-                    setTimeout(
-                      () =>
-                        (copyToClipboardRef.current!.innerHTML =
-                          "Copy to clipboard"),
-                      2000
-                    );
-                  }}
-                  ref={copyToClipboardRef}
-                  className="btn"
-                >
-                  Copy to clipboard
-                </button>
-                <label htmlFor="invite" className="btn">
-                  Ok
-                </label>
-              </div>
-            </div>
-          </div>
-          <Link to="users">
-            <button className="btn btn-info">Manage Users</button>
-          </Link>
           {owner ? (
             <button
               onClick={() => {
@@ -230,135 +163,7 @@ export default function BookmarkIndexPage() {
         </div>
       </div>
       <div className="flex h-full w-full flex-col 2xl:w-[800px]">
-        <main className="w-full">
-          <div className="h-full w-full p-3">
-            <ul className="rounded-box h-full space-y-2 bg-base-100 p-2">
-              <li>
-                <label
-                  htmlFor="new-bookmark"
-                  className="flex cursor-pointer items-center justify-center py-2 font-semibold"
-                >
-                  <div className="flex gap-4">
-                    <PlusCircleIcon width={20} /> New Bookmark
-                  </div>
-                </label>
-                <input
-                  type="checkbox"
-                  id="new-bookmark"
-                  className="modal-toggle"
-                />
-                <div className="modal">
-                  <div className="modal-box">
-                    <Form
-                      method="post"
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: 8,
-                        width: "100%",
-                      }}
-                    >
-                      <div className="p-5">
-                        <label className="label">
-                          <span className="label-text">Name</span>
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Type here"
-                          ref={nameRef}
-                          name="name"
-                          className={`input input-bordered w-full ${
-                            actionData?.errors?.name && "input-error"
-                          }`}
-                          aria-invalid={
-                            actionData?.errors?.name ? true : undefined
-                          }
-                          aria-errormessage={
-                            actionData?.errors?.name ? "name-error" : undefined
-                          }
-                        />
-                        <label className="label">
-                          <span className="label-text-alt text-error">
-                            {actionData?.errors?.name}
-                          </span>
-                        </label>
-                        <label className="label">
-                          <span className="label-text">Link</span>
-                        </label>
-                        <input
-                          className="hidden"
-                          value="new_bookmark"
-                          name="option"
-                          type="text"
-                          readOnly
-                        />
-                        <input
-                          type="link"
-                          placeholder="Type here"
-                          ref={linkRef}
-                          name="link"
-                          className={`input input-bordered w-full ${
-                            actionData?.errors?.link && "input-error"
-                          }`}
-                          aria-invalid={
-                            actionData?.errors?.link ? true : undefined
-                          }
-                          aria-errormessage={
-                            actionData?.errors?.link ? "name-error" : undefined
-                          }
-                        />
-                        <label className="label">
-                          <span className="label-text-alt text-error">
-                            {actionData?.errors?.link}
-                          </span>
-                        </label>
-                      </div>
-                      <div className="modal-action">
-                        <button>
-                          <label htmlFor="new-bookmark" className="btn">
-                            Done
-                          </label>
-                        </button>
-                        <button className="btn" type="submit">
-                          Create
-                        </button>
-                      </div>
-                    </Form>
-                  </div>
-                </div>
-              </li>
-              {data.bookmarks.map((team) => (
-                <li key={team.id}>
-                  <div className="rounded-box block space-y-1 bg-base-200 p-4">
-                    <div className="flex items-center gap-4 text-lg font-semibold">
-                      <div>📝 {team.name}</div>
-                      <button
-                        onClick={() => {
-                          const formData = new FormData();
-                          formData.append("option", "bookmark");
-                          formData.append("id", team.id);
-                          submit(formData, { method: "post" });
-                        }}
-                        className="btn btn-error btn-circle btn-xs"
-                      >
-                        <XIcon height={16} className="text-white" />
-                      </button>
-                    </div>
-                    <a
-                      href={team.link}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-sm font-normal text-secondary"
-                    >
-                      {team.link}
-                    </a>
-                    <div className="text-xs">{team.createdBy.email}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </main>
+        <BookmarkManager bookmarks={data.bookmarks} />
       </div>
     </div>
   );

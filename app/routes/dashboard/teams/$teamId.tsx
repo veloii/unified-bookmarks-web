@@ -6,6 +6,7 @@ import { requireUserId } from "~/session.server";
 import { getTeam, getTeams } from "~/models/team.server";
 import { getBookmarks } from "~/models/bookmarks.server";
 import invariant from "tiny-invariant";
+import { TeamModals } from "~/components/modals";
 
 type LoaderData = {
   team: NonNullable<Awaited<ReturnType<typeof getTeam>>>;
@@ -25,5 +26,10 @@ export const loader: LoaderFunction = async ({ request, params }) => {
 };
 
 export default function TeamsPage() {
-  return <Outlet />;
+  return (
+    <>
+      <TeamModals />
+      <Outlet />
+    </>
+  );
 }

@@ -13,19 +13,17 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-
 import { loadCSS } from "fg-loadcss";
 import tailwindStylesheetUrl from "./styles/tailwind.css";
 import globalsStylesheetUrl from "./styles/globals.css";
 import { getUser } from "./session.server";
 import { useEffect, useState } from "react";
 import { isServer } from "./utils";
-import { Tour, TourContextProvider } from "./contexts/TourContext";
-import Modals from "./components/Modals";
-import {
-  PasswordActionData,
-  PasswordActionDataContextProvider,
-} from "./contexts/PasswordActionDataContext";
+import type { Tour } from "./contexts/TourContext";
+import { TourContextProvider } from "./contexts/TourContext";
+import { Modals } from "~/components/modals";
+import type { PasswordActionData } from "./contexts/PasswordActionDataContext";
+import { PasswordActionDataContextProvider } from "./contexts/PasswordActionDataContext";
 import Toasts from "./components/Toasts";
 export { ErrorBoundary, CatchBoundary } from "./components/ErrorsBrand";
 

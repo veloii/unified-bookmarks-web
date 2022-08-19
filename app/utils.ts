@@ -70,7 +70,7 @@ export function useOptionalUser(): User | undefined {
 }
 
 export function useOptionalTeam(): Team | undefined {
-  const data = useMatchesData("routes/dashboard/teams/$teamId/index");
+  const data = useMatchesData("routes/dashboard/teams/$teamId");
   if (!data || !isTeam(data.team)) {
     return undefined;
   }
