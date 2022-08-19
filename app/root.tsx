@@ -68,6 +68,7 @@ export default function App() {
   const [tour, setTour] = useState<Tour>(false);
   const [modal, setModal] = useState<Modal>({
     passwordActionData: {},
+    createBookmarkActionData: {},
     team: undefined,
   });
 
@@ -87,16 +88,15 @@ export default function App() {
           </head>
           <body className="h-full">
             <Toasts />
-            <Modals />
             <Outlet />
             <LiveReload />
             <ScrollRestoration />
-            <Scripts />
             <script
               dangerouslySetInnerHTML={{
                 __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
               }}
             />
+            <Scripts />
           </body>
         </html>
       </TourContextProvider>

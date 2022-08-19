@@ -38,6 +38,13 @@ export const ErrorBoundary: ErrorBoundaryComponent = ({ error }) => {
           </Link>
         </div>
         <Scripts />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify({
+              CHROME_EXTENSION_URL: "",
+            })}`,
+          }}
+        />
       </body>
     </html>
   );
@@ -74,6 +81,13 @@ export function CatchBoundary() {
           </Link>
         </div>
         <Scripts />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.ENV = ${JSON.stringify({
+              CHROME_EXTENSION_URL: "",
+            })}`,
+          }}
+        />
       </body>
     </html>
   );

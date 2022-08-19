@@ -126,43 +126,9 @@ export default function BookmarkIndexPage() {
           >
             Invite Member
           </label>
-          {owner ? (
-            <button
-              onClick={() => {
-                if (confirm) {
-                  const formData = new FormData();
-                  formData.append("option", "delete_team");
-                  submit(formData, { method: "post" });
-                } else {
-                  setConfirm(true);
-                  setTimeout(() => {
-                    setConfirm(false);
-                  }, 2000);
-                }
-              }}
-              className="btn btn-error"
-            >
-              {confirm ? "Are you sure?" : "Delete Team"}
-            </button>
-          ) : (
-            <button
-              onClick={() => {
-                if (confirm) {
-                  const formData = new FormData();
-                  formData.append("option", "leave_team");
-                  submit(formData, { method: "post" });
-                } else {
-                  setConfirm(true);
-                  setTimeout(() => {
-                    setConfirm(false);
-                  }, 2000);
-                }
-              }}
-              className="btn btn-error"
-            >
-              {confirm ? "Are you sure?" : "Leave"}
-            </button>
-          )}
+          <label htmlFor="delete-team" className={`btn btn-error`}>
+            {owner ? "Delete Team" : "Leave Team"}
+          </label>
         </div>
       </div>
       <div className="flex h-full w-full flex-col 2xl:w-[800px]">

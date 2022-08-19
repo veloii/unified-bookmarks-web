@@ -1,6 +1,12 @@
 import type { Team } from "@prisma/client";
 import { createContext } from "react";
 
+export type CreateBookmarkActionData = {
+  errors?: {
+    name?: string;
+    link?: string;
+  };
+};
 export type PasswordActionData = {
   errors?: {
     oldPass?: string;
@@ -13,6 +19,7 @@ export type PasswordActionData = {
 
 export type Modal = {
   passwordActionData: PasswordActionData;
+  createBookmarkActionData: CreateBookmarkActionData;
   team: Team | undefined;
 };
 

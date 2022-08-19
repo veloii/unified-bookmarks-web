@@ -8,6 +8,7 @@ import Navbar from "~/components/Navbar";
 
 import logo from "~/branding/UN.webp";
 import Flow from "~/components/Flow";
+import { Modals } from "~/components/modals";
 export { ErrorBoundary, CatchBoundary } from "~/components/Errors";
 
 export const meta: MetaFunction = () => {
@@ -37,6 +38,7 @@ export default function TeamsPage() {
   return (
     <>
       <Flow />
+      <Modals />
       <div className="flex h-full min-h-screen flex-col divide-y-2 divide-base-200">
         <Navbar teams={data.teams}>
           <Outlet />

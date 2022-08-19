@@ -34,7 +34,7 @@ export default function TeamsPage() {
     const copy = { ...modal };
     modal!.team = data.team as unknown as Team;
     setModal(copy);
-  });
+  }, []);
   return (
     <>
       <Outlet />
