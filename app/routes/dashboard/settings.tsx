@@ -6,6 +6,7 @@ import invariant from "tiny-invariant";
 import {
   deleteUser,
   editPassword,
+  editUserName,
   getUserById,
   verifyLogin,
 } from "~/models/user.server";
@@ -72,6 +73,11 @@ export const action: ActionFunction = async ({ request }) => {
     invariant(deletion, "Could not delete account");
     return json<ActionData>({ success: { account: true } });
   }
+  if (option === "rename") {
+    const name = formData.get("name");
+    const rename = await editUserName(userId, name?.toString() || "");
+    invariant(rename, "could not rename account");
+  }
 
   return null;
 };
@@ -91,6 +97,7 @@ export const meta: MetaFunction = ({ parentsData }) => {
 
 export default function Settings() {
   const user = useUser();
+  const submit = useSubmit();
   const actionData = useActionData() as ActionData;
   const { setModal, modal } = useContext(ModalContext);
   useEffect(() => {
@@ -98,6 +105,15 @@ export default function Settings() {
     copy.passwordActionData = actionData;
     setModal(copy);
   }, [actionData]);
+
+  const changeName = (name: string) => {
+    submit(
+      { option: "rename", name },
+      {
+        method: "post",
+      }
+    );
+  };
 
   return (
     <>
@@ -110,6 +126,21 @@ export default function Settings() {
             You are logged in as:{" "}
             <span className="font-semibold">{user.email}</span>
           </p>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="label-text">
+                Name {"(public to team members)"}
+              </span>
+            </label>
+            <input
+              type="text"
+              placeholder="Jane Doe"
+              defaultValue={user.name ?? ""}
+              className="input w-full max-w-xs"
+              onChange={(press) => changeName(press.target.value)}
+            />
+          </div>
+
           <ThemePicker />
 
           <div className="space-x-2">

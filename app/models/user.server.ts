@@ -14,7 +14,7 @@ export async function getUserByEmail(email: User["email"]) {
 }
 
 export async function deleteUser(id: User["id"]) {
-  return prisma.user.delete({where: {id}})
+  return prisma.user.delete({ where: { id } });
 }
 
 export async function editPassword(id: User["id"], password: string) {
@@ -45,6 +45,15 @@ export async function createUser(email: User["email"], password: string) {
           hash: hashedPassword,
         },
       },
+    },
+  });
+}
+
+export async function editUserName(id: User["id"], name: User["name"]) {
+  return prisma.user.update({
+    where: { id },
+    data: {
+      name,
     },
   });
 }

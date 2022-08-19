@@ -45,13 +45,13 @@ export default function BookmarkManager({ bookmarks }: LoaderData) {
             <li key={team.id}>
               <div className="rounded-box block space-y-1 bg-base-200 p-4">
                 <div className="flex items-center gap-4 text-lg font-semibold">
-                  <div>📝 {team.name}</div>
+                  <div>{team.name}</div>
                   <button
                     onClick={() => {
-                      const formData = new FormData();
-                      formData.append("option", "bookmark");
-                      formData.append("id", team.id);
-                      submit(formData, { method: "post" });
+                      submit(
+                        { option: "bookmark", id: team.id },
+                        { method: "post" }
+                      );
                     }}
                     className="btn btn-error btn-circle btn-xs"
                   >
@@ -66,7 +66,9 @@ export default function BookmarkManager({ bookmarks }: LoaderData) {
                 >
                   {team.link}
                 </a>
-                <div className="text-xs">{team.createdBy.email}</div>
+                <div className="text-xs">
+                  {team.createdBy.name} {`(${team.createdBy.email})`}
+                </div>
               </div>
             </li>
           ))}

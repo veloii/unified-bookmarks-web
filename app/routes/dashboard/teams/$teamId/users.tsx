@@ -86,10 +86,10 @@ export default function BookmarkIndexPage() {
                 <td className="space-x-5">
                   <button
                     onClick={() => {
-                      const formData = new FormData();
-                      formData.append("option", "ban");
-                      formData.append("user", user.id);
-                      submit(formData, { method: "post" });
+                      submit(
+                        { option: "ban", user: user.id },
+                        { method: "post" }
+                      );
                     }}
                     className={`btn btn-error ${
                       user.id === myUser.id || !owner ? "btn-disabled" : ""
@@ -99,10 +99,10 @@ export default function BookmarkIndexPage() {
                   </button>
                   <button
                     onClick={() => {
-                      const formData = new FormData();
-                      formData.append("option", "ban");
-                      formData.append("user", user.id);
-                      submit(formData, { method: "post" });
+                      submit(
+                        { option: "ban", user: user.id },
+                        { method: "post" }
+                      );
                     }}
                     className={`btn btn-warning ${
                       user.id === myUser.id || !owner ? "btn-disabled" : ""
@@ -112,10 +112,10 @@ export default function BookmarkIndexPage() {
                   </button>
                   <button
                     onClick={() => {
-                      const formData = new FormData();
-                      formData.append("option", "transfer");
-                      formData.append("user", user.id);
-                      submit(formData, { method: "post" });
+                      submit(
+                        { option: "transfer", user: user.id },
+                        { method: "post" }
+                      );
                     }}
                     className={`btn btn-accent ${
                       user.id === myUser.id || !owner ? "btn-disabled" : ""

@@ -100,10 +100,10 @@ export default function NewTeamPage() {
 
   React.useEffect(() => {
     if (params?.code) {
-      const formData = new FormData();
-      formData.append("option", "join");
-      formData.append("join", params?.code);
-      submit(formData, { method: "post", action: "/dashboard/teams/new" });
+      submit(
+        { option: "join", join: params?.code },
+        { method: "post", action: "/dashboard/teams/new" }
+      );
     }
   }, []);
 
