@@ -1,5 +1,6 @@
+import { ArrowLeftIcon } from "@heroicons/react/solid";
 import { Form } from "@remix-run/react";
-import React from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import { ModalContext } from "~/contexts/ModalContext";
 
@@ -7,10 +8,12 @@ export default function NewBookmarkModal() {
   const { modal } = useContext(ModalContext);
   const nameRef = React.useRef<HTMLInputElement>(null);
   const linkRef = React.useRef<HTMLInputElement>(null);
+  const backRef = React.useRef<HTMLLabelElement>(null);
 
   React.useEffect(() => {
     if (modal?.createBookmarkActionData?.errors?.name) nameRef.current?.focus();
     if (modal?.createBookmarkActionData?.errors?.link) linkRef.current?.focus();
+    if (modal?.createBookmarkActionData === null) backRef.current?.click();
   }, [modal?.createBookmarkActionData]);
 
   return (
@@ -91,13 +94,18 @@ export default function NewBookmarkModal() {
                 </span>
               </label>
             </div>
-            <div className="modal-action">
-              <button>
-                <label htmlFor="new-bookmark" className="btn">
-                  Done
-                </label>
-              </button>
-              <button className="btn" type="submit">
+            <div className="modal-action flex w-full justify-between">
+              <label
+                ref={backRef}
+                htmlFor="new-bookmark"
+                className="btn btn-ghost"
+              >
+                <ArrowLeftIcon height={18} />
+              </label>
+              <button
+                className="ghost-primary-color btn btn-ghost"
+                type="submit"
+              >
                 Create
               </button>
             </div>

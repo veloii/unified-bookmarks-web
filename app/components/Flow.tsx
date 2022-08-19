@@ -114,7 +114,7 @@ export default function Flow() {
               </p>
               <div className="modal-action">
                 <button
-                  className="btn btn-ghost text-primary"
+                  className="ghost-primary-color btn btn-ghost"
                   onClick={() => setPage(1)}
                 >
                   Next
@@ -134,7 +134,7 @@ export default function Flow() {
               height: "auto",
               width: "60rem",
             }}
-            className="modal-box max-w-5xl overflow-hidden p-0 "
+            className="modal-box max-w-5xl p-0 "
             ref={page2}
           >
             <motion.div {...fadeIn} className="p-5">
@@ -178,7 +178,7 @@ export default function Flow() {
                   Install
                 </a>
                 <button
-                  className="btn btn-ghost text-primary"
+                  className="ghost-primary-color btn btn-ghost"
                   onClick={() => setPage(3)}
                 >
                   Next
@@ -219,7 +219,7 @@ export default function Flow() {
                   Take a tour
                 </button>
                 <button
-                  className="btn btn-ghost text-primary"
+                  className="ghost-primary-color btn btn-ghost"
                   onClick={() => setClose(true)}
                 >
                   Done

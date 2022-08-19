@@ -56,3 +56,20 @@ html {
 * {
   box-sizing: border-box;
 }
+
+[data-theme="light"] .ghost-primary-color {
+  --tw-text-opacity: 1;
+  color: hsl(var(--p) / var(--tw-text-opacity)) !important;
+}
+[data-theme="darker"] .ghost-primary-color {
+  --tw-text-opacity: 1;
+  color: hsl(var(--pc) / var(--tw-text-opacity)) !important;
+}
+[data-theme="dark"] .ghost-primary-color {
+  --tw-text-opacity: 1;
+  color: hsl(var(--pc) / var(--tw-text-opacity)) !important;
+}
+/* fall back to dark */
+.ghost-primary-color {
+  color: hsl(var(--pc) / var(--tw-text-opacity)) !important;
+}
