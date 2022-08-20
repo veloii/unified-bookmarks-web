@@ -32,9 +32,9 @@ export default function TeamsPage() {
   const { setModal, modal } = useContext(ModalContext);
   useEffect(() => {
     const copy = { ...modal };
-    modal!.team = data.team as unknown as Team;
+    copy!.team = data.team as unknown as Team;
     setModal(copy);
-  }, []);
+  }, [data]);
   return (
     <>
       <Outlet />

@@ -31,7 +31,6 @@ model Password {
 
 model Team {
   id    String @id @default(cuid())
-  intId Int    @unique @default(autoincrement())
   code  String @unique @default(cuid())
   name  String @unique
   users User[] @relation("teams")

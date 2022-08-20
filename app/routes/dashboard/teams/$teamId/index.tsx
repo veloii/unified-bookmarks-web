@@ -13,6 +13,7 @@ import { useMatchesData, useUser } from "~/utils";
 import logo from "~/branding/UN.webp";
 import { TourContext } from "~/contexts/TourContext";
 import BookmarkManager from "~/components/BookmarkManager";
+import { ModalContext } from "~/contexts/ModalContext";
 
 type CreateBookmarkActionData = {
   errors?: {
@@ -41,6 +42,7 @@ type LoaderData = {
 
 export const action: ActionFunction = async ({ request, params }) => {
   const userId = await requireUserId(request);
+
   invariant(params.teamId, "teamId not found");
 
   const formData = await request.formData();
@@ -58,7 +60,7 @@ export const action: ActionFunction = async ({ request, params }) => {
     }
     if (typeof link !== "string" || link.length === 0) {
       return json<CreateBookmarkActionData>(
-        { errors: { name: "Link is required" } },
+        { errors: { link: "Link is required" } },
         { status: 400 }
       );
     }
@@ -99,6 +101,7 @@ export const action: ActionFunction = async ({ request, params }) => {
 export default function BookmarkIndexPage() {
   const submit = useSubmit();
   const [confirm, setConfirm] = useState(false);
+  const { modal } = useContext(ModalContext);
   const data = useMatchesData("routes/dashboard/teams/$teamId") as LoaderData;
   const user = useUser();
   const { tour, setTour } = useContext(TourContext);

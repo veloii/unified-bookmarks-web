@@ -142,7 +142,7 @@ export function getTeamsBookmarks({ userId }: { userId: User["id"] }) {
         },
       },
     },
-    select: { id: true, name: true, bookmarks: true, intId: true },
+    select: { id: true, name: true, bookmarks: true },
     orderBy: { updatedAt: "desc" },
   });
 }
