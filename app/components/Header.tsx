@@ -48,7 +48,11 @@ export default function Header() {
               </li>
             </ul>
           </div>
-          <img src={logo} className="h-6 w-auto sm:h-12" />
+          <img
+            alt="Unified Bookmarks"
+            src={logo}
+            className="h-6 w-auto sm:h-12"
+          />
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0 font-semibold text-black">
@@ -68,9 +72,10 @@ export default function Header() {
                 }
                 rel="noreferrer"
               >
+                {" "}
                 Chrome Extension
-              </a>
-            </li>
+              </a>{" "}
+            </li>{" "}
           </ul>
         </div>
         <div className="navbar-end">

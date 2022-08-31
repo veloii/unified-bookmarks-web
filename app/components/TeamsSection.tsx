@@ -18,10 +18,12 @@ export default function TeamsSection() {
           <div className="relative">
             <img
               className="w-[1000px] -rotate-1 rounded-xl shadow transition hover:-translate-y-8"
+              alt="Screenshot"
               src={screenshot2}
             />
             <img
               className="absolute mt-64 w-[1000px] -translate-y-full rotate-6 rounded-xl shadow transition-all hover:mt-56"
+              alt="Screenshot"
               src={screenshot}
             />
           </div>

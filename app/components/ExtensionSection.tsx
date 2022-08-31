@@ -89,6 +89,7 @@ export default function ExtensionSection() {
               <img
                 src={tabs[active].img}
                 className="w-full"
+                alt="Screenshot of extension"
                 width="100vw"
                 height="45rem"
               />

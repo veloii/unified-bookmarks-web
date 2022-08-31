@@ -1,5 +1,5 @@
 import { Link, useLocation, useNavigate } from "@remix-run/react";
-import { MetaFunction } from "@remix-run/server-runtime";
+import type { MetaFunction } from "@remix-run/server-runtime";
 import { useEffect } from "react";
 import type { getTeams } from "~/models/team.server";
 import { useMatchesData, useUser } from "~/utils";
