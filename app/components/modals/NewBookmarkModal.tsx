@@ -1,41 +1,29 @@
 import { ArrowLeftIcon } from "@heroicons/react/solid";
 import { Form } from "@remix-run/react";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useContext } from "react";
 import { ModalContext } from "~/contexts/ModalContext";
 
 export default function NewBookmarkModal() {
-  const { modal, setModal } = useContext(ModalContext);
+  const { modal } = useContext(ModalContext);
   const nameRef = React.useRef<HTMLInputElement>(null);
   const linkRef = React.useRef<HTMLInputElement>(null);
   const backRef = React.useRef<HTMLLabelElement>(null);
-  const modalRef = React.useRef<HTMLInputElement>(null);
 
   React.useEffect(() => {
-    if (modal?.createBookmarkActionData?.errors?.name) {
-      modalRef.current!.checked = true;
-      nameRef.current?.focus();
-    }
-    if (modal?.createBookmarkActionData?.errors?.link) {
-      modalRef.current!.checked = true;
-      linkRef.current?.focus();
-    }
-  }, [modal?.createBookmarkActionData, modalRef]);
+    if (modal?.createBookmarkActionData?.errors?.name) nameRef.current?.focus();
+    if (modal?.createBookmarkActionData?.errors?.link) linkRef.current?.focus();
+    if (modal?.createBookmarkActionData === null) backRef.current?.click();
+  }, [modal?.createBookmarkActionData]);
 
   return (
     <>
-      <input
-        type="checkbox"
-        id="new-bookmark"
-        className="modal-toggle"
-        ref={modalRef}
-      />
+      <input type="checkbox" id="new-bookmark" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box p-3">
           <Form
             action={`/dashboard/teams/${modal?.team?.id}?index`}
             method="post"
-            onSubmit={() => backRef.current?.click()}
             style={{
               display: "flex",
               flexDirection: "column",
