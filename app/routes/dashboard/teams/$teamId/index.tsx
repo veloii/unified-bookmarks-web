@@ -25,8 +25,8 @@ type CreateBookmarkActionData = {
 export const meta: MetaFunction = ({ parentsData }) => {
   return parentsData["routes/dashboard/teams/$teamId"]?.team
     ? {
-        title: `${parentsData["routes/dashboard/teams/$teamId"].team.name} - Overview - Unified Bookmarks`,
-        "og:title": `${parentsData["routes/dashboard/teams/$teamId"].team.name} - Overview - Unified Bookmarks`,
+        "og:title": `${parentsData["routes/dashboard/teams/$teamId"].team.name}#${parentsData["routes/dashboard/teams/$teamId"].team.discrim} - Overview - Unified Bookmarks`,
+        title: `${parentsData["routes/dashboard/teams/$teamId"].team.name}#${parentsData["routes/dashboard/teams/$teamId"].team.discrim} - Overview - Unified Bookmarks`,
         description: "View your team",
 
         "og:description": "View your team",
@@ -111,7 +111,10 @@ export default function BookmarkIndexPage() {
     <div className="flex h-full flex-col divide-x-2 divide-base-100 ">
       <div className="flex-grow space-y-5 p-5">
         <div className="space-y-1">
-          <h2 className="text-3xl font-black">{data.team.name}</h2>
+          <div className="flex items-end gap-0.5">
+            <h2 className="text-3xl font-black">{data.team.name}</h2>
+            <p className="text-sm mb-0.5">#{data.team.discrim}</p>
+          </div>
           <p>
             {data.team.users.length} Member{data.team.users.length !== 1 && "s"}
           </p>

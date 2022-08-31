@@ -7,8 +7,9 @@ import {
   editBookmark,
   getBookmarkByName,
 } from "~/models/bookmarks.server";
-import { getTeamByName, getTeamsBookmarks } from "~/models/team.server";
+import { getTeamByNameDiscrim, getTeamsBookmarks } from "~/models/team.server";
 import { requireUserId } from "~/session.server";
+import splitDiscrimAndFriendlyName from "~/utils";
 
 export const action: ActionFunction = async ({ request, params }) => {
   const userId = await requireUserId(request);
@@ -17,7 +18,14 @@ export const action: ActionFunction = async ({ request, params }) => {
   const teamName = formData.get("team_name");
   invariant(teamName, "team_name not found");
   const option = formData.get("option");
-  const team = await getTeamByName({ userId, name: teamName.toString() });
+  const [teamFriendlyName, teamDiscrim] = splitDiscrimAndFriendlyName(
+    teamName.toString()
+  );
+  const team = await getTeamByNameDiscrim({
+    userId,
+    name: teamFriendlyName,
+    discrim: teamDiscrim,
+  });
   invariant(team, "Cannot find team");
 
   if (option === "new_bookmark") {
@@ -80,5 +88,9 @@ export const action: ActionFunction = async ({ request, params }) => {
 export const loader: LoaderFunction = async ({ request }) => {
   const userId = await requireUserId(request);
   const teams = await getTeamsBookmarks({ userId });
-  return teams;
+  return teams.map((team) => ({
+    ...team,
+    name: `${team.name}#${team.discrim}`,
+    friendlyName: team.name,
+  }));
 };

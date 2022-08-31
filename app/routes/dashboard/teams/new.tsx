@@ -1,19 +1,12 @@
 import type { ActionFunction, MetaFunction } from "@remix-run/node";
 import { json, redirect } from "@remix-run/node";
-import {
-  Form,
-  useActionData,
-  useLocation,
-  useParams,
-  useSubmit,
-} from "@remix-run/react";
+import { Form, useActionData, useParams, useSubmit } from "@remix-run/react";
 import * as React from "react";
 
 import type { Team } from "~/models/team.server";
 import { createTeam, joinTeam } from "~/models/team.server";
 import { requireUserId } from "~/session.server";
 import logo from "~/branding/UN.webp";
-import Flow from "~/components/Flow";
 
 export const meta: MetaFunction = ({ parentsData }) => {
   return parentsData.root.user
@@ -57,7 +50,7 @@ export const action: ActionFunction = async ({ request }) => {
       team = await createTeam({ name, userId });
     } catch {
       return json<ActionData>(
-        { errors: { name: "Name already used" } },
+        { errors: { name: "Too many teams with that name" } },
         { status: 400 }
       );
     }

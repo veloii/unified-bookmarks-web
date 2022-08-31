@@ -14,6 +14,26 @@ export function isServer() {
   }
 }
 
+export default function splitDiscrimAndFriendlyName(
+  name: string
+): [string, number] {
+  const discrim = Number(name.substring(name.length - 4));
+  const friendlyName = String(name.substring(0, name.length - 5));
+  return [friendlyName, discrim];
+}
+
+export function getRandomInt(min: number, max: number) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export function getUniqueDiscrim(discrims: number[]): number {
+  const randomNumber = getRandomInt(0, 9999);
+  if (discrims.includes(randomNumber)) return getUniqueDiscrim(discrims);
+  else return randomNumber;
+}
+
 /**
  * This should be used any time the redirect path is user-provided
  * (Like the query string on our login/signup pages). This avoids

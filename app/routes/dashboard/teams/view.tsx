@@ -38,7 +38,10 @@ export default function IndexPage() {
             className="card w-96 flex-grow bg-base-100 shadow-xl"
           >
             <div className="card-body">
-              <h2 className="card-title">{team.name}</h2>
+              <div className="flex justify-center items-end gap-0.5">
+                <h2 className="card-title">{team.name}</h2>
+                <p className="text-sm mb-0.5">#{team.discrim}</p>
+              </div>
               <p>
                 {team.users.length} Member
                 {team.users.length !== 1 && "s"}

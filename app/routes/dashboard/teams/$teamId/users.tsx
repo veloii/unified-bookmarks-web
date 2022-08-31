@@ -18,8 +18,8 @@ type LoaderData = {
 export const meta: MetaFunction = ({ parentsData }) => {
   return parentsData["routes/dashboard/teams/$teamId"]?.team
     ? {
-        title: `${parentsData["routes/dashboard/teams/$teamId"].team.name} - Users - Unified Bookmarks`,
-        "og:title": `${parentsData["routes/dashboard/teams/$teamId"].team.name} - Users - Unified Bookmarks`,
+        "og:title": `${parentsData["routes/dashboard/teams/$teamId"].team.name}#${parentsData["routes/dashboard/teams/$teamId"].team.discrim} - Users - Unified Bookmarks`,
+        title: `${parentsData["routes/dashboard/teams/$teamId"].team.name}#${parentsData["routes/dashboard/teams/$teamId"].team.discrim} - Users - Unified Bookmarks`,
         description: "View users",
 
         "og:description": "View users",

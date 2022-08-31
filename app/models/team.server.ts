@@ -1,6 +1,7 @@
 import type { User, Team } from "@prisma/client";
 import cuid from "cuid";
 import { prisma } from "~/db.server";
+import { getUniqueDiscrim } from "~/utils";
 
 export type { Team } from "@prisma/client";
 
@@ -95,16 +96,18 @@ export function resetCode({
   });
 }
 
-export function getTeamByName({
+export function getTeamByNameDiscrim({
   name,
+  discrim,
   userId,
-}: Pick<Team, "name"> & {
+}: Pick<Team, "name" | "discrim"> & {
   userId: User["id"];
 }) {
   return prisma.team.findFirst({
     select: { id: true },
     where: {
       name,
+      discrim,
       users: {
         some: {
           id: userId,
@@ -121,7 +124,14 @@ export function getTeam({
   userId: User["id"];
 }) {
   return prisma.team.findFirst({
-    select: { id: true, name: true, users: true, owner: true, code: true },
+    select: {
+      id: true,
+      discrim: true,
+      name: true,
+      users: true,
+      owner: true,
+      code: true,
+    },
     where: {
       id,
       users: {
@@ -142,7 +152,7 @@ export function getTeamsBookmarks({ userId }: { userId: User["id"] }) {
         },
       },
     },
-    select: { id: true, name: true, bookmarks: true },
+    select: { id: true, name: true, discrim: true, bookmarks: true },
     orderBy: { updatedAt: "desc" },
   });
 }
@@ -156,20 +166,32 @@ export function getTeams({ userId }: { userId: User["id"] }) {
         },
       },
     },
-    select: { id: true, name: true, users: true, owner: true },
+    select: { id: true, name: true, users: true, discrim: true, owner: true },
     orderBy: { updatedAt: "desc" },
   });
 }
 
-export function createTeam({
+export async function createTeam({
   name,
   userId,
 }: Pick<Team, "name"> & {
   userId: User["id"];
 }) {
+  const usedDiscrims = await prisma.team.findMany({
+    where: {
+      name,
+    },
+  });
+
+  let discrim: number;
+
+  if (usedDiscrims.length === 0) discrim = getUniqueDiscrim([]);
+  else discrim = getUniqueDiscrim(usedDiscrims.map((team) => team.discrim));
+
   return prisma.team.create({
     data: {
       name,
+      discrim,
       owner: {
         connect: {
           id: userId,

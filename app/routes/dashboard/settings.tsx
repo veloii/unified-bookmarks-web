@@ -129,7 +129,7 @@ export default function Settings() {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="label-text">
-                Name {"(public to team members)"}
+                Nickname {"(public to team members)"}
               </span>
             </label>
             <input

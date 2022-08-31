@@ -109,7 +109,7 @@ export default function Navbar(props: {
                         }
                         to={`/dashboard/teams/${team.id}`}
                       >
-                        {team.name}
+                        {team.name}#{team.discrim}
                       </NavLink>
                     </li>
                     {idx === 0 && tour === 1 && <Flow1 />}
@@ -134,7 +134,7 @@ export default function Navbar(props: {
                         }
                         to={`/dashboard/teams/${team.id}`}
                       >
-                        {team.name}
+                        {team.name}#{team.discrim}
                       </NavLink>
                     </li>
                     {idx === 0 && tour === 1 && <Flow1 />}
@@ -151,7 +151,7 @@ export default function Navbar(props: {
               <NavLink
                 to="settings"
                 className={({ isActive }) => ` ${isActive ? "active" : ""}`}
-              >
+            >
                 <CogIcon width={20} /> Settings
               </NavLink>
             </li>

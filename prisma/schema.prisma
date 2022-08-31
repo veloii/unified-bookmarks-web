@@ -32,7 +32,8 @@ model Password {
 model Team {
   id    String @id @default(cuid())
   code  String @unique @default(cuid())
-  name  String @unique
+  discrim Int @default(1)
+  name  String
   users User[] @relation("teams")
 
   createdAt DateTime   @default(now())
@@ -40,9 +41,10 @@ model Team {
   bookmarks Bookmark[]
 
   bannedUsers User[] @relation("bannedTeams")
-
   owner   User   @relation("ownedTeams", fields: [ownerId], references: [id], onDelete: Cascade, onUpdate: Cascade)
   ownerId String
+
+  @@unique([name, discrim])
 }
 
 model Bookmark {
